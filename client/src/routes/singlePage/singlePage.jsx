@@ -1,4 +1,4 @@
-import "./singlePage.scss";
+import "./singlepage.scss";
 import Slider from "../../components/slider/Slider";
 import Map from "../../components/map/Map";
 import { singlePostData, userData } from "../../lib/dummydata";
