@@ -59,23 +59,37 @@ export const login = async (req, res) => {
 
         if(!isPasswordValid) return res.status(401).json({message: "Invalid Credentials!"});
         
-        const {password: userpassword, ...userInfo} = user
 
-
-
-        //generate cooke token and send to the user
-        const maxAge = 60 * 60 * 24 * 7;  // 1 week in seconds
-        const token = jwt.sign(
-          { id: user.id },
-          process.env.JWT_SECRET_KEY,
-          { expiresIn: maxAge }
-        );
         
-        // Correct syntax for setting the cookie
-        res.setHeader('Set-Cookie', `token=${token}; HttpOnly; Max-Age=${maxAge}`).json(userInfo);
-    }catch(err){
-        console.log(err)
-        res.status(500).json({message:"Failed to login!"})
+    // GENERATE COOKIE TOKEN AND SEND TO THE USER
+
+    // res.setHeader("Set-Cookie", "test=" + "myValue").json("success")
+    const age = 1000 * 60 * 60 * 24 * 7;
+
+    const { password: userPassword, ...userInfo } = user;
+
+    const token = jwt.sign(
+      {
+        id: user.id,
+        isAdmin: false,
+      },
+      process.env.JWT_SECRET_KEY,
+      { expiresIn: age }
+    );
+
+  
+
+    res
+      .cookie("token", token, {
+        httpOnly: true,
+        // secure:true,
+        maxAge: age,
+      })
+      .status(200)
+      .json(userInfo);
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ message: "Failed to login!" });
 
     }
  

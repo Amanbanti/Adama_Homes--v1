@@ -1,20 +1,30 @@
 import express from 'express';
-import postRoute from "./routes/post.route.js"
-import authRoute from "./routes/auth.route.js"
+import postRoute from "./routes/post.route.js";
+import authRoute from "./routes/auth.route.js";
+import testRoute from "./routes/test.route.js";
 import dotenv from 'dotenv';
-import cors from "cors"
-// import cookieParser from 'cookie-parser';
+import cors from "cors";
+import cookieParser from 'cookie-parser';
 
 dotenv.config();
-const app= express();
+const app = express();
 
 app.use(express.json());
-// app.use(cookieParser)
-app.use(cors({origin: process.env.CLIENT_URL, credentials: true}))
-app.use("/api/posts" , postRoute);
-app.use("/api/auth" , authRoute);
+// Correctly invoke cookieParser middleware
+app.use(cookieParser());
 
+// CORS configuration, ensuring your frontend can communicate with your backend
+app.use(cors({
+    origin: process.env.CLIENT_URL,
+    credentials: true,
+}));
 
-app.listen(8800, ()=>{
+// Define your routes
+app.use("/api/posts", postRoute);
+app.use("/api/auth", authRoute);
+app.use("/api/test", testRoute);
+
+// Start the server
+app.listen(8800, () => {
     console.log('Server is running...');
-})
+});
