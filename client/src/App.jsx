@@ -6,7 +6,7 @@ import SinglePage from "./routes/singlePage/singlePage";
 import ProfilePage from "./routes/profilePage/ProfilePage.jsx";
 import Login from "./routes/login/login";
 import Register from "./routes/register/register";
-// import ProfileUpdatePage from "./routes/profileUpdatePage/profileUpdatePage";
+import ProfileUpdatePage from "./routes/profileUpdatePage/profileUpdatePage";
 // import NewPostPage from "./routes/newPostPage/newPostPage";
 // import { listPageLoader, profilePageLoader, singlePageLoader } from "./lib/loaders";
 
@@ -31,12 +31,6 @@ function App() {
         },
 
         {
-          path: "/profile",
-          element: <ProfilePage/>,
-              
-        },
-
-        {
           path: "/login",
           element: <Login />,
         },
@@ -46,19 +40,23 @@ function App() {
         },
       ],
     },
-    // {
-    //   path: "/",
-    //   element: <RequireAuth />,
-    //   children: [
-    //     {
-    //       path: "/profile",
-    //       element: <ProfilePage />,
-    //       loader: profilePageLoader
-    //     },
-    //     {
-    //       path: "/profile/update",
-    //       element: <ProfileUpdatePage />,
-    //     },
+    {
+      path: "/",
+      element: <RequireAuth />,
+      children: [
+        {
+          path: "/profile",
+          element: <ProfilePage />,
+          // loader: profilePageLoader
+        },
+        
+        {
+          path: "/profile/update",
+          element: <ProfileUpdatePage />,
+        },
+
+      ]
+    }
     //     {
     //       path: "/add",
     //       element: <NewPostPage />,
