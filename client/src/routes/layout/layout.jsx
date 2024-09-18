@@ -2,7 +2,7 @@ import "./layout.scss";
 import Navbar from "../../components/Navbar/Navbar";
 import { Navigate, Outlet } from "react-router-dom";
 import { useContext } from "react";
-// import { AuthContext } from "../../context/AuthContext";
+import { AuthContext } from "../../context/AuthContext";
 
 function Layout() {
   return (
@@ -34,5 +34,7 @@ function RequireAuth() {
     );
   }
 }
+
+
 
 export { Layout, RequireAuth };
