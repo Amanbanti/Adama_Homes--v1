@@ -3,12 +3,12 @@ import "./profileUpdatePage.scss";
 import { AuthContext } from "../../context/AuthContext";
 import apiRequest from "../../lib/apiRequest";
 import { useNavigate } from "react-router-dom";
-// import UploadWidget from "../../components/uploadWidget/UploadWidget";
+import UploadWidget from "../../components/uploadWidget/UploadWidget";
 
 function ProfileUpdatePage() {
   const { currentUser, updateUser } = useContext(AuthContext);
   const [error, setError] = useState("");
-  const [avatar, setAvatar] = useState([]);
+  const [avatar, setAvatar] = useState(currentUser.avatar || []);
 
   const navigate = useNavigate();
 
@@ -23,9 +23,15 @@ function ProfileUpdatePage() {
         username,
         email,
         password,
-        avatar:avatar[0]
+        avatar: avatar[0],
       });
+      
+      // Update user in the AuthContext
       updateUser(res.data);
+      
+      // Optionally update localStorage if needed for persistence
+      localStorage.setItem("user", JSON.stringify(res.data));
+      
       navigate("/profile");
     } catch (err) {
       console.log(err);
@@ -60,22 +66,26 @@ function ProfileUpdatePage() {
             <label htmlFor="password">Password</label>
             <input id="password" name="password" type="password" />
           </div>
-          <button>Update</button>
-          {error && <span>error</span>}
+          <button type="submit">Update</button>
+          {error && <span>{error}</span>}
         </form>
       </div>
       <div className="sideContainer">
-        <img src={avatar[0] || currentUser.avatar || "/noavatar.jpg"} alt="" className="avatar" />
-        {/* <UploadWidget
+        <img
+          src={avatar[0] || currentUser.avatar || "/noavatar.jpg"}
+          alt="Avatar"
+          className="avatar"
+        />
+        <UploadWidget
           uwConfig={{
-            cloudName: "lamadev",
-            uploadPreset: "estate",
+            cloudName: "dzvmhk9fm",
+            uploadPreset: "zky8e1ds",
             multiple: false,
-            maxImageFileSize: 2000000,
+            maxImageFileSize: 5000000,
             folder: "avatars",
           }}
           setState={setAvatar}
-        /> */}
+        />
       </div>
     </div>
   );

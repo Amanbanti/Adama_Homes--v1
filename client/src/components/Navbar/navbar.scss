@@ -46,6 +46,9 @@ nav {
       }
     }
   }
+
+
+
   .right {
     flex: 2;
     display: flex;
@@ -107,16 +110,19 @@ nav {
     }
 
     .register {
+      @include lg{ 
       width: 90px;
       height: 50px;
       display: flex;
       align-items: center;
       border-radius: 5px;
       padding-right: 3px;
-    
+      cursor: pointer;
 
       background-color: #fece51;
+     
     }
+     }
 
     .menuIcon {
       display: none;
