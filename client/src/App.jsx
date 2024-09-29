@@ -7,7 +7,7 @@ import ProfilePage from "./routes/profilePage/ProfilePage.jsx";
 import Login from "./routes/login/login";
 import Register from "./routes/register/register";
 import ProfileUpdatePage from "./routes/profileUpdatePage/profileUpdatePage";
-// import NewPostPage from "./routes/newPostPage/newPostPage";
+import NewPostPage from "./routes/newPostPage/newPostPage";
 // import { listPageLoader, profilePageLoader, singlePageLoader } from "./lib/loaders";
 
 function App() {
@@ -55,14 +55,12 @@ function App() {
           element: <ProfileUpdatePage />,
         },
 
-      ]
-    }
-    //     {
-    //       path: "/add",
-    //       element: <NewPostPage />,
-    //     },
-    //   ],
-    // },
+        {
+          path: "/add",
+          element: <NewPostPage />,
+        },
+      ],
+    },
   ]);
 
   return <RouterProvider router={router} />;
