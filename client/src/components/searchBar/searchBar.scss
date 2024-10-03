@@ -76,12 +76,18 @@
       
     }
 
-
+    a{
+      flex: 1;
+      background-color: #fece51;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       button {
         border: none;
         cursor: pointer;
         background-color: #fece51;
-        flex: 1;
+      
+        
         
         @include sm{
           padding: 10px;
@@ -92,5 +98,7 @@
           height: 24px;
         }
       }
+    }
+     
     }
   }
